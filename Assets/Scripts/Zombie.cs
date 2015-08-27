@@ -12,7 +12,6 @@ public class Zombie : MonoBehaviour {
 	
 	private ZombieState state;
 	public Animator animator { get; private set; }
-	public ZombiePathNodeManager manager { get; private set; }
 
 	void Start () 
 	{
@@ -20,14 +19,8 @@ public class Zombie : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag ("Player");
 		state = new ZombieState_Locked (this);
 		animator = GetComponent<Animator>();
-		manager = GameObject.FindGameObjectWithTag ("ZombiePathNodeManager").GetComponent<ZombiePathNodeManager>();
 	}
-	
-	void Update () 
-	{
-		state.Update ();
-	}
-	
+		
 	void FixedUpdate ()
 	{
 		state.FixedUpdate ();
@@ -51,11 +44,7 @@ public class Zombie : MonoBehaviour {
 	{
 		if (collider.gameObject == player)
 		{
-			Player playerScript = player.GetComponent<Player>();
-			if (playerScript != null)
-			{
-				playerScript.TakeDamage ();
-			}
+			player.GetComponent<Player>().TakeDamage ();
 		}
 	}
 	

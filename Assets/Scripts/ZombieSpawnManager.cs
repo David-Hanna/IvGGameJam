@@ -80,9 +80,8 @@ public class ZombieSpawnManager : MonoBehaviour {
 			}
 		}
 		
-		int randomNum = random.Next (allowedSpawnPoints.Count);
 		GameObject zombie = GameObject.Instantiate (Resources.Load ("Zombie")) as GameObject;
-		zombie.transform.position = allowedSpawnPoints[randomNum].position;
+		zombie.transform.position = allowedSpawnPoints[random.Next (allowedSpawnPoints.Count)].position;
 		zombie.transform.rotation = Quaternion.LookRotation (Vector3.forward);
 	}
 }

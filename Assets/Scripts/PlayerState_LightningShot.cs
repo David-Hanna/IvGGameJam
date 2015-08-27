@@ -5,7 +5,6 @@ public class PlayerState_LightningShot : PlayerState_Normal
 {
 	public PlayerState_LightningShot(Player p) : base(p) 
 	{
-		Debug.Log ("PlayerState is LIGHTNING SHOT");
 	}
 
 	override public void Update () {}

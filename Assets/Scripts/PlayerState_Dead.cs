@@ -9,21 +9,9 @@ public class PlayerState_Dead : PlayerState {
 	{
 		player = p;
 		
-		Animator animator = player.GetComponent<Animator>();
-		if (animator != null)
-		{
-			animator.SetBool ("Dead", true);
-		}
+		player.GetComponent<Animator>().SetBool ("Dead", true);
 		
-		Transform torch = player.transform.GetChild(1);
-		if (torch != null)
-		{
-			SpriteRenderer renderer = torch.gameObject.GetComponent<SpriteRenderer>();
-			if (renderer != null)
-			{
-				renderer.enabled = false;
-			}
-		}
+		player.transform.GetChild (1).gameObject.GetComponent<SpriteRenderer>().enabled = false;
 		
 		CircleCollider2D[] colliders = player.GetComponents<CircleCollider2D>();
 		for (int i = 0; i < colliders.Length; ++i)
@@ -31,13 +19,7 @@ public class PlayerState_Dead : PlayerState {
 			colliders[i].enabled = false;
 		}
 		
-		body = player.GetComponent<Rigidbody2D>();
-		if (body)
-		{
-			body.velocity = new Vector2(0.0f, 0.0f);
-		}
-		
-		Debug.Log ("PlayerState is DEAD");
+		player.GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, 0.0f);
 	}
 
 	override public void Update () {}

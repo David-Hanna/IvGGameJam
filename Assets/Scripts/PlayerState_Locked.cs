@@ -10,8 +10,6 @@ public class PlayerState_Locked : PlayerState
 		player = p;
 		lockedForCountdown = new CountdownTimer ();
 		lockedForCountdown.Start (0.5f);
-		
-		Debug.Log ("PlayerState is LOCKED");
 	}
 
 	override public void Update () 

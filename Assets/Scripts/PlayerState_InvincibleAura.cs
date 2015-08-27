@@ -5,7 +5,6 @@ public class PlayerState_InvincibleAura : PlayerState_Normal
 {
 	public PlayerState_InvincibleAura(Player p) :base(p) 
 	{
-		Debug.Log ("PlayerState is INVINCIBLE AURA");
 	}
 
 	override public void Update () {}

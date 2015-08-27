@@ -27,15 +27,8 @@ public class Fireball : MonoBehaviour {
 	{
 		if (collider.gameObject.tag == "Zombie")
 		{
-			Zombie zombie = collider.gameObject.GetComponent<Zombie>();
-			if (zombie != null)
-			{
-				zombie.TakeDamage (1);
-			}
+			collider.gameObject.GetComponent<Zombie>().TakeDamage (1);
 		}
-		if (collider.gameObject.tag != "ZombiePathNode")
-		{
-			Destroy(gameObject);
-		}
+		Destroy(gameObject);
 	}
 }

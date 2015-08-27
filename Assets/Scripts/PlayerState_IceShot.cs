@@ -5,7 +5,6 @@ public class PlayerState_IceShot : PlayerState_Normal
 {
 	public PlayerState_IceShot(Player p) : base(p) 
 	{
-		Debug.Log ("PlayerState is ICE SHOT");
 	}
 
 	override public void Update () {}

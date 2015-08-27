@@ -8,7 +8,6 @@ public class FireArm : MonoBehaviour {
 	private CountdownTimer disappearTimer;
 	private SpriteRenderer renderer;
 
-	// Use this for initialization
 	void Awake () 
 	{
 		disappearTimer = new CountdownTimer();
@@ -16,7 +15,6 @@ public class FireArm : MonoBehaviour {
 		renderer.enabled = false;
 	}
 	
-	// Update is called once per frame
 	void Update () 
 	{
 		if (!disappearTimer.done)

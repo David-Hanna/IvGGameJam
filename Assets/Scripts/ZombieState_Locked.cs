@@ -11,19 +11,17 @@ public class ZombieState_Locked : ZombieState
 		
 		lockedTimer = new CountdownTimer();
 		lockedTimer.Start (1.0f);
-		//Debug.Log ("Zombie State is LOCKED.");
 	}
-
-	public override void Update () 
+	
+	public override void FixedUpdate () 
 	{
-		lockedTimer.Update (Time.deltaTime);
+		lockedTimer.Update (Time.fixedDeltaTime);
 		if (lockedTimer.done)
 		{
 			zombie.ChangeState (new ZombieState_Normal(zombie));
 		}
 	}
 	
-	public override void FixedUpdate () {}
 	public override void UpdateAI () {}
 	public override void OnStateChange () {}
 }

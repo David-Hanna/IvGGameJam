@@ -16,12 +16,11 @@ public class PlayerState_Normal : PlayerState
 		fireDelayTimer = new CountdownTimer();
 		fireArm = player.gameObject.GetComponentInChildren<FireArm>();
 		animator = player.GetComponent<Animator>();
-		
-		Debug.Log ("PlayerState is NORMAL");
 	}
 
 	override public void Update () 
 	{
+		animator.SetBool ("Walking", rigidbody.velocity.sqrMagnitude > 0.0f);
 		Fire();
 	}
 	
@@ -36,24 +35,25 @@ public class PlayerState_Normal : PlayerState
 		bool a = Input.GetKey (KeyCode.A);
 		bool s = Input.GetKey (KeyCode.S);
 		bool d = Input.GetKey (KeyCode.D);
-		bool moving = false;
 		
-		float actualSpeed = player.speed;
+		float actualSpeed;
 		
-		if (w && d || w && a)
+		if ((w && d) || (w && a) || (s && d) || (s && a))
 		{
-			actualSpeed *= 0.707f;
+			actualSpeed = player.speed * 0.707f;
+		}
+		else
+		{
+			actualSpeed = player.speed;
 		}
 		
 		if (a && !d)
 		{
 			rigidbody.velocity = new Vector2(-actualSpeed, rigidbody.velocity.y);
-			moving = true;
 		}
 		else if (d && !a)
 		{
 			rigidbody.velocity = new Vector2(actualSpeed, rigidbody.velocity.y);
-			moving = true;
 		}
 		else
 		{
@@ -63,26 +63,20 @@ public class PlayerState_Normal : PlayerState
 		if (w && !s)
 		{
 			rigidbody.velocity = new Vector2(rigidbody.velocity.x, actualSpeed);
-			moving = true;
 		}
 		else if (s && !w)
 		{
 			rigidbody.velocity = new Vector2(rigidbody.velocity.x, -actualSpeed);
-			moving = true;
 		}
 		else
 		{
 			rigidbody.velocity = new Vector2(rigidbody.velocity.x, 0.0f);
 		}
 		
-		if (animator != null)
-		{
-			animator.SetBool ("Walking", moving);
-		}
-		
 		Vector3 lookAtPosition = player.camera.ScreenToWorldPoint(Input.mousePosition) - player.transform.position;
-		float angle = (Mathf.Atan2 (lookAtPosition.y, lookAtPosition.x) * Mathf.Rad2Deg) - 90.0f;
-		player.transform.rotation = Quaternion.AngleAxis (angle, Vector3.forward);
+		//float angle = (Mathf.Atan2 (lookAtPosition.y, lookAtPosition.x) * Mathf.Rad2Deg) - 90.0f;
+		//player.transform.rotation = Quaternion.AngleAxis (angle, Vector3.forward);
+		player.transform.rotation = Quaternion.AngleAxis ((Mathf.Atan2 (lookAtPosition.y, lookAtPosition.x) * Mathf.Rad2Deg) - 90.0f, Vector3.forward);
 	}
 	
 	override public void Fire () 
